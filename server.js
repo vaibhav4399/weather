@@ -10,4 +10,6 @@ app.get('/*', (req, res) => {
     res.sendFile(`index.html`, { root: 'dist/weather' });
 });
 
-app.listen(port);
+app.listen(port, () => {
+    console.log("Weather App is online successfully")
+});
