@@ -2,14 +2,13 @@ const express = require('express');
 const path = require('path');
 
 const app = express();
-const port = process.env.PORT || 8080;
 
-app.use(express.static('./dist/weather'));
+app.use(express.static(__dirname+'/dist/weather'));
 
 app.get('/*', (req, res) => {
-    res.sendFile(`index.html`, { root: 'dist/weather' });
+    res.sendFile(__dirname + "/dist/weather/index.html");
 });
 
-app.listen(port, () => {
+app.listen(process.env.PORT || 8080, () => {
     console.log("Weather App is online successfully")
 });
