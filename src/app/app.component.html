@@ -8,51 +8,52 @@
     </form>
   </div>
 
-  <div class="container" *ngIf="weatherData">
-    <div class="shadow contain-box mx-auto">
-      <!-- <span class="">F</span> -->
-      <div class="upper overflow-hidden card h-50">
-        <img src="../assets/images/summer.jpeg" alt="" class="card-img img-fluid" *ngIf="weatherData.main.temp >= 20">
-        <img src="../assets/images/winter.jpg" alt="" class="card-img" *ngIf="weatherData.main.temp < 20">
-        <div class="data card-img-overlay">
-          <div class="location">{{ weatherData.name }}</div>
-          <div class="temperature">{{ weatherData.main.temp}} &#8451;</div>
-        </div>
-      </div>
-      <div class="lower h-50 card">
-        <div class="card-header">More Information:</div>
-        <div class="card-body">
-          <div class="list-group">
-            <div class="list-group-item">
-              <div class="info-label">
-                <img src="../assets/icons/min.svg" alt="">
-                <span>min</span>
-              </div>
-              <div class="info-value">{{ weatherData.main.temp_min }} &#8451;</div>
-            </div>
-            <div class="list-group-item">
-              <div class="info-label">
-                <img src="../assets/icons/max.svg" alt="">
-                <span>max</span>
-              </div>
-              <div class="info-value">{{ weatherData.main.temp_max }} &#8451;</div>
-            </div>
-            <div class="list-group-item">
-              <div class="info-label">
-                <img src="../assets/icons/Rain.svg" alt="">
-                <span>Humidity</span>
-              </div>
-              <div class="info-value">{{ weatherData.main.humidity }}</div>
-            </div>
-            <div class="list-group-item">
-              <div class="info-label">
-                <img src="../assets/icons/wind.svg" alt="">
-                <span>wind</span>
-              </div>
-              <div class="info-value">{{ weatherData.wind.speed }} Km/h</div>
-            </div>
+    <div class="container" *ngIf="weatherData">
+      <div class="shadow contain-box mx-auto">
+        <!-- <span class="">F</span> -->
+        <div class="upper overflow-hidden card h-50">
+          <img src="../assets/images/summer.jpeg" alt="" class="card-img img-fluid" *ngIf="weatherData.main.temp >= 20">
+          <img src="../assets/images/winter.jpg" alt="" class="card-img" *ngIf="weatherData.main.temp < 20">
+          <div class="data card-img-overlay">
+            <div class="location">{{ weatherData.name }}</div>
+            <div class="temperature">{{ weatherData.main.temp}} &#8451;</div>
           </div>
         </div>
+        <div class="lower h-50 card">
+          <div class="card-header">More Information:</div>
+          <div class="card-body">
+            <div class="list-group">
+              <div class="list-group-item">
+                <div class="info-label">
+                  <img src="../assets/icons/min.svg" alt="">
+                  <span>min</span>
+                </div>
+                <div class="info-value">{{ weatherData.main.temp_min }} &#8451;</div>
+              </div>
+              <div class="list-group-item">
+                <div class="info-label">
+                  <img src="../assets/icons/max.svg" alt="">
+                  <span>max</span>
+                </div>
+                <div class="info-value">{{ weatherData.main.temp_max }} &#8451;</div>
+              </div>
+              <div class="list-group-item">
+                <div class="info-label">
+                  <img src="../assets/icons/Rain.svg" alt="">
+                  <span>Humidity</span>
+                </div>
+                <div class="info-value">{{ weatherData.main.humidity }}</div>
+              </div>
+              <div class="list-group-item">
+                <div class="info-label">
+                  <img src="../assets/icons/wind.svg" alt="">
+                  <span>wind</span>
+                </div>
+                <div class="info-value">{{ weatherData.wind.speed }} Km/h</div>
+              </div>
+            </div>
+          </div>
+      </div>
     </div>
   </div>
 </div>
