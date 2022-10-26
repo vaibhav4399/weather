@@ -13,12 +13,20 @@ export class WeatherService {
 
   constructor( private http : HttpClient) {}
   
-  getWeatherData(cityname: string): Observable<WeatherData>{
+  getWeatherData(cityname: string, units: string): Observable<WeatherData>{
     return this.http.get<WeatherData>(this.url, {
       params: new HttpParams()
         .set('q', cityname)
-        .set('units', "metric")
-        .set('mode',"json")
+        .set('units', units)
+        .set('appid', environment.api_id)
+    })
+  }
+
+  getImperialWeatherData(cityname: string, units: string): Observable<WeatherData>{
+    return this.http.get<WeatherData>(this.url, {
+      params: new HttpParams()
+        .set('q', cityname)
+        .set('units', units)
         .set('appid', environment.api_id)
     })
   }

@@ -1,5 +1,8 @@
 <div class="container-fluid pt-5">
-
+  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+    <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
   <div class="input-group">
     <form action="" #form="ngForm" (submit)="onSubmit()">
       <input type="search" class="form-control" placeholder="Search" aria-label="Search"
@@ -9,43 +12,59 @@
   </div>
     <div class="container" *ngIf="weatherData">
       <div class="shadow contain-box mx-auto">
-        <!-- <span class="">F</span> -->
         <div class="upper overflow-hidden card h-50">
-          <img src="../assets/images/summer.jpeg" alt="" class="card-img img-fluid" *ngIf="weatherData.main.temp >= 20">
-          <img src="../assets/images/winter.jpg" alt="" class="card-img" *ngIf="weatherData.main.temp < 20">
+          <div *ngIf="unitsbool; else Farenheit">
+            <img src="../assets/images/summer.jpeg" alt="" class="card-img img-fluid"
+              *ngIf="weatherData.main.temp >= 20">
+            <img src="../assets/images/winter.jpg" alt="" class="card-img" *ngIf="weatherData.main.temp < 20">
+          </div>
+          <ng-template #Farenheit>
+            <img src="../assets/images/summer.jpeg" alt="" class="card-img img-fluid" *ngIf="weatherData.main.temp >= 68">
+            <img src="../assets/images/winter.jpg" alt="" class="card-img" *ngIf="weatherData.main.temp < 68">
+          </ng-template>
           <div class="data card-img-overlay">
             <div class="location">{{ weatherData.name }}</div>
-            <div class="temperature">{{ weatherData.main.temp}} &#8451;</div>
+            <div class="temperature">{{ weatherData.main.temp}} {{ unitsbool? "&#8451;" : "&#8457;" }}</div>
           </div>
         </div>
         <div class="lower h-50 card">
-          <div class="card-header">More Information:</div>
+          <div class="card-header">
+            <div class="te">
+              More Information:
+            </div>
+            <div class="flea">
+              <p class="inform"> &#8457; </p>
+              <input class="toggle" type="checkbox" id="CelsiustoFarenheit" (change)="onChange()" [(ngModel)]="unitsbool" checked>
+              <label class="" for="CelsiustoFarenheit"></label>
+              <p class="inform"> &#8451; </p>
+            </div>
+          </div>
           <div class="card-body">
             <div class="list-group">
               <div class="list-group-item">
                 <div class="info-label">
-                  <img src="../assets/icons/min.svg" alt="">
+                  <img src="../assets/icons/min.svg" alt="Minimum temperature icon">
                   <span>min</span>
                 </div>
-                <div class="info-value">{{ weatherData.main.temp_min }} &#8451;</div>
+                <div class="info-value">{{ weatherData.main.temp_min }} {{ unitsbool? "&#8451;" : "&#8457;" }}</div>
               </div>
               <div class="list-group-item">
                 <div class="info-label">
-                  <img src="../assets/icons/max.svg" alt="">
+                  <img src="../assets/icons/max.svg" alt="Maximum temperature icon">
                   <span>max</span>
                 </div>
-                <div class="info-value">{{ weatherData.main.temp_max }} &#8451;</div>
+                <div class="info-value">{{ weatherData.main.temp_max }} {{ unitsbool? "&#8451;" : "&#8457;" }}</div>
               </div>
               <div class="list-group-item">
                 <div class="info-label">
-                  <img src="../assets/icons/Rain.svg" alt="">
+                  <img src="../assets/icons/Rain.svg" alt="Humidity icon">
                   <span>Humidity</span>
                 </div>
                 <div class="info-value">{{ weatherData.main.humidity }}</div>
               </div>
               <div class="list-group-item">
                 <div class="info-label">
-                  <img src="../assets/icons/wind.svg" alt="">
+                  <img src="../assets/icons/wind.svg" alt="Wind icon">
                   <span>wind</span>
                 </div>
                 <div class="info-value">{{ weatherData.wind.speed }} Km/h</div>

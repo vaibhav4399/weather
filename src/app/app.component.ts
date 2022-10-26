@@ -12,26 +12,48 @@ export class AppComponent implements OnInit {
 
   constructor(private weatherService: WeatherService) { }
 
-  cityname!: string;
-  weatherData?: WeatherData
+  cityname: string = "Alaska";
+  weatherData!: WeatherData;
+  unitsbool: boolean = true;
+  units: string = this.unitsbool ? "metric" : "imperial";
+  error?: string;
 
   ngOnInit(): void  {
-    this.getWeatherData("Alaska");
-    this.cityname = "";
+    this.getWeatherData(this.cityname, this.units);
   }
 
   onSubmit() {
-    this.getWeatherData(this.cityname);
-    this.cityname = "";
+    this.getWeatherData(this.cityname,this.units);
   }
 
-  private getWeatherData(cityname: string) {
-    this.weatherService.getWeatherData(cityname)
+  onChange() {
+    this.units = this.unitsbool ? "metric" : "imperial";
+    this.cityname = this.weatherData.name;  
+    this.getImperialWeatherData(this.cityname,this.units);
+  }
+
+  private getWeatherData(cityname: string, units: string) {
+    this.weatherService.getWeatherData(cityname,units)
       .subscribe({
         next: (response) => {
           this.weatherData = response;
+          this.cityname = "";
           console.log(this.weatherData);
         }
       })
   }
+
+  private getImperialWeatherData(cityname: string, units: string) {
+    this.weatherService.getImperialWeatherData(cityname,units)
+    .subscribe({
+      next: (response) => {
+        this.weatherData.main = response.main;
+        this.cityname = "";
+      },
+      error: (error) => {
+        console.log(error.message);
+      }
+    })
+  }
+
 }
